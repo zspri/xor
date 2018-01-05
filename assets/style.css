@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: hsla(0,0%,100%,.87);
+    background-color: #303030;
+    margin: 10px;
+    margin-top: 55px;
+}
+
+.material-icons {
+    font-size: inherit;
+    position: relative;
+    top: 2px;
+    z-index: 0;
+}
+
+.navbar {
+    z-index: 1;
+    color: hsla(0,0%,100%,.87);
+    background-color: rgb(67, 181, 129);
+    padding: 17px;
+    box-shadow: 0 1px 5px rgba(0,0,0,.2), 0 2px 2px rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    font-size: 15px;
+    z-index: 0;
+}
+
+.navbar span {
+    float: left;
+    padding: 0 3px;
+}
+
+.navbar .right {
+    float: right;
+}
+
+.navbar a {
+    padding: 15px;
+    text-decoration: none;
+    color: rgba(255,255,255,.56);
+    transition: .3s;
+    overflow: hidden;
+    cursor: pointer;
+    display: inline;
+}
+
+.navbar a:hover, .navbar .active {
+    border-bottom: 2px solid rgba(255,255,255,.87);
+    color: rgba(255,255,255,.87);
+}
+
+.editor {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 52.4px;
+}
+
+input[type=text] {
+    position: absolute;
+    top: 12px;
+    font-family: 'Inconsolata', monospace;
+    background-color: transparent;
+    outline: none;
+    padding: 5px;
+    color: rgba(255,255,255,.78);
+    margin-left: 12px;
+    border: none;
+    border-bottom: 2px solid rgba(255,255,255,.38);
+    transition: .3s;
+}
+
+input[type=text]:focus {
+    border-bottom: 2px solid rgba(255,255,255,.87);
+}
+
+input[type=text]::placeholder {
+    color: rgba(255,255,255,.56);
+}
+
+.swal-overlay {
+    overflow: hidden;
+}
+
+.swal-modal {
+    background-color: rgb(44,47,51);
+    border-radius: 2px;
+}
+
+.swal-title {
+    color: rgba(255,255,255,.78);
+    font-weight: 400;
+}
+
+.swal-text {
+    color: rgba(255,255,255,.56);
+}
+
+.swal-button {
+    font-size: 14px;
+    border: none;
+    border-radius: 2px;
+    background-color: rgba(0,0,0,0);
+    color: #4286f4;
+}
+
+.swal-button:hover {
+    background-color: rgb(35,39,42);
+    border: none;
+    box-shadow: none;
+}
+
+.swal-button:focus {
+    color: #41b2f4;
+    border: none;
+    box-shadow: none;
+}

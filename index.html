@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/codemirror.css">
+    <script async src="assets/filesaver.js"></script>
+    <script async src="assets/sweetalert.min.js"></script>
+    <script src="assets/codemirror.js"></script>
+    <title>Xor Editor</title>
+</head>
+<body>
+    <div class="navbar">
+        <span>Xor Editor</span>
+        <input type="text" name="fname" placeholder="Enter file name" spellcheck="false"></input>
+        <span class="right">
+            <a href="javascript:makeNew()">New</a>
+            <a href="javascript:saveFile()">Save</a>
+        </span>
+    </div>
+    <div class="editor">
+    </div>
+    <script>
+    var editor = CodeMirror(document.getElementsByClassName("editor")[0], {
+        lineNumbers: true,
+        lineWrapping: true,
+        autofocus: true
+    });
+    var fname = document.getElementsByName("fname")[0];
+    fname.value = "example.txt";
+
+    function saveFile() {
+        try {
+            if (!fname.value) {
+                swal("Error", "Please enter a valid file name.")
+            } else {
+                var blob = new Blob([editor.getValue()], {type: "text/plain;charset=utf-8"})
+                saveAs(blob, fname.value)
+            }
+        } catch (e) {
+            swal("Error", "Something went wrong when saving your file.")
+        }
+    }
+    </script>
+</body>
