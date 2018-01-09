@@ -1,5 +1,5 @@
 # Xor Editor
-A simple, yet powerful code editor in your browser.
+A simple, yet  hackable powerful code editor in your browser.
 
 [![](https://img.shields.io/badge/Try%20it-online-brightgreen.svg)](https://xor-editor.github.io/xor)
 
