@@ -19,4 +19,4 @@ A simple, yet powerful website editor in your browser.
 
 ## Screenshots
 
-<img width=80%" src="https://cdn.discordapp.com/attachments/363708080535633920/404797869095387136/unknown.png">
+<img width="80%" src="https://cdn.discordapp.com/attachments/363708080535633920/404797869095387136/unknown.png">
