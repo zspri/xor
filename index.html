@@ -46,7 +46,7 @@
             if (!fname.value) {
                 swal("Error", "Please enter a valid file name.")
             } else {
-                var blob = new Blob([editor.getValue()], {type: "text/plain;charset=utf-8"})
+                var blob = new Blob([editor.getValue()], {type: "text/html;charset=utf-8"})
                 saveAs(blob, fname.value)
             }
         } catch (e) {
