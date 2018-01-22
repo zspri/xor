@@ -5,16 +5,23 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/syntax.css">
     <link rel="stylesheet" href="assets/codemirror.css">
     <script async src="assets/filesaver.js"></script>
     <script async src="assets/sweetalert.min.js"></script>
     <script src="assets/codemirror.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!--- CodeMirror syntax highlighting -->
+    <script src="https://codemirror.net/mode/css/css.js"></script>
+    <script src="https://codemirror.net/mode/javascript/javascript.js"></script>
+    <script src="https://codemirror.net/mode/xml/xml.js"></script>
+    <script src="https://codemirror.net/mode/htmlmixed/htmlmixed.js"></script>
     <title>Xor Editor</title>
 </head>
 <body>
     <div class="navbar">
         <span>Xor Editor</span>
-        <input type="text" name="fname" placeholder="Enter file name" spellcheck="false"></input>
+        <input type="text" name="fname" placeholder="Enter file name" spellcheck="false">
         <span class="right">
             <a href="javascript:makeNew()">New</a>
             <a href="javascript:saveFile()">Save</a>
@@ -22,14 +29,17 @@
     </div>
     <div class="editor">
     </div>
+    <iframe seamless="1" frameborder="0">
+    </iframe>
     <script>
     var editor = CodeMirror(document.getElementsByClassName("editor")[0], {
         lineNumbers: true,
         lineWrapping: true,
-        autofocus: true
+        autofocus: true,
+        mode: "htmlmixed"
     });
     var fname = document.getElementsByName("fname")[0];
-    fname.value = "example.txt";
+    fname.value = "example.html";
 
     function saveFile() {
         try {
@@ -43,5 +53,28 @@
             swal("Error", "Something went wrong when saving your file.")
         }
     }
+
+    function makeNew() {
+        window.open(window.location.href);
+    }
+
+    function setIframePosition() {
+        var iframe = document.getElementsByTagName("iframe")[0];
+        if ($(document).width() > 900) {
+            iframe.width = String($(document).width() / 2) + "px";
+            iframe.height = String($(document).height() - 54.2) + "px";
+        } else {
+            iframe.width = String(document.body.clientWidth + 18) + "px";
+            iframe.height = String(($(document).height() / 20 * 9)) + "px";
+        }
+    }
+
+    editor.on('change', function(instance, changeObj) {
+        var iframe = document.getElementsByTagName("iframe")[0];
+        iframe.srcdoc = editor.getValue();
+    });
+
+    $(window).resize(setIframePosition);
+    setIframePosition();
     </script>
 </body>
