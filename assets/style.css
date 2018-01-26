@@ -8,6 +8,7 @@ body {
     background-color: white;
     margin: 10px;
     margin-top: 55px;
+    overflow: hidden;
 }
 
 .material-icons {
@@ -28,7 +29,6 @@ body {
     left: 0;
     right: 0;
     font-size: 15px;
-    z-index: 0;
 }
 
 .navbar span {
@@ -48,6 +48,12 @@ body {
     overflow: hidden;
     cursor: pointer;
     display: inline;
+    z-index: 9997;
+    user-select: none;
+}
+
+a.mi:hover {
+    border-bottom: none !important;
 }
 
 .navbar a:hover, .navbar .active {
@@ -61,12 +67,18 @@ body {
     right: 50%;
     bottom: 0;
     top: 52.4px;
+    z-index: 9998;
+}
+
+.editor.noiframe {
+    right: 0;
 }
 
 iframe {
     position: absolute;
     left: 50%;
-    top: 52.4px;
+    top: 52.4px;4
+    z-index: 9999;
 }
 
 input[type=text] {
@@ -129,10 +141,58 @@ input[type=text]::placeholder {
     box-shadow: none;
 }
 
+.drop {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+    position: absolute;
+    padding: 0px;
+    list-style-type: none;
+    z-index: 10000;
+    border-radius: 3px;
+    position: absolute;
+    top: 25px;
+    right: 20px;
+}
+
+.drop li {
+    padding: 12px 1em;
+    min-width: 150px;
+    font-size: 90%;
+    transition: .3s;
+    z-index: 10000;
+    background-color: white;
+    color: rgba(0,0,0,.87);
+    cursor: pointer;
+}
+
+.drop li:hover {
+    background-color: #eee;
+}
+
+.drop li .right {
+    text-align: right;
+    float: right;
+    color: rgba(0,0,0,.56);
+}
+
+#panel {
+    z-index: 2;
+    position: absolute;
+    top: 52.4px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    color: rgba(0,0,0,.87);
+}
+
 @media (max-width: 900px) {
     .editor {
         right: 0;
         bottom: 45%;
+    }
+
+    .editor.noiframe {
+        bottom: 0;
     }
 
     iframe {

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="assets/codemirror.css">
     <script async src="assets/filesaver.js"></script>
     <script async src="assets/sweetalert.min.js"></script>
+    <script async src="assets/ripple.js"></script>
     <script src="assets/codemirror.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <!--- CodeMirror syntax highlighting -->
@@ -25,56 +26,20 @@
         <span class="right">
             <a href="javascript:makeNew()">New</a>
             <a href="javascript:saveFile()">Save</a>
+            <a class="mi" onclick="toggleMenu()"><i class="material-icons">more_vert</i></a>
         </span>
     </div>
+    <ul class="drop" style="display:none">
+        <li onclick="toggleThemePanel();toggleMenu();">Theme settings</li>
+        <li onclick="togglePreview();toggleMenu();">Disable live preview</li>
+        <li onclick="window.open('https://github.com/xor-editor/xor');toggleMenu();">View on GitHub<span class="right"><i class="material-icons">open_in_new</i></span></li>
+    </ul>
     <div class="editor">
     </div>
-    <iframe seamless="1" frameborder="0">
+    <iframe seamless="1" frameborder="0" style="display:block">
     </iframe>
-    <script>
-    var editor = CodeMirror(document.getElementsByClassName("editor")[0], {
-        lineNumbers: true,
-        lineWrapping: true,
-        autofocus: true,
-        mode: "htmlmixed"
-    });
-    var fname = document.getElementsByName("fname")[0];
-    fname.value = "example.html";
-
-    function saveFile() {
-        try {
-            if (!fname.value) {
-                swal("Error", "Please enter a valid file name.")
-            } else {
-                var blob = new Blob([editor.getValue()], {type: "text/html;charset=utf-8"})
-                saveAs(blob, fname.value)
-            }
-        } catch (e) {
-            swal("Error", "Something went wrong when saving your file.")
-        }
-    }
-
-    function makeNew() {
-        window.open(window.location.href);
-    }
-
-    function setIframePosition() {
-        var iframe = document.getElementsByTagName("iframe")[0];
-        if ($(document).width() > 900) {
-            iframe.width = String($(document).width() / 2) + "px";
-            iframe.height = String($(document).height() - 54.2) + "px";
-        } else {
-            iframe.width = String(document.body.clientWidth + 18) + "px";
-            iframe.height = String(($(document).height() / 20 * 9)) + "px";
-        }
-    }
-
-    editor.on('change', function(instance, changeObj) {
-        var iframe = document.getElementsByTagName("iframe")[0];
-        iframe.srcdoc = editor.getValue();
-    });
-
-    $(window).resize(setIframePosition);
-    setIframePosition();
-    </script>
+    <div id="panel" style="display:none">
+        <span onclick="toggleThemePanel()">&times;</span>
+    </div>
+    <script src="assets/editor.js"></script>
 </body>

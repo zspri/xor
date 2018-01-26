@@ -9,6 +9,10 @@
   word-wrap: break-word;
 }
 
+.CodeMirror, *[class^="CodeMirror-"] {
+    z-index: 9996;
+}
+
 /* PADDING */
 
 .CodeMirror-lines {
