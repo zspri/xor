@@ -1,0 +1,32 @@
+.cm-meta, .cm-tag.cm-bracket, .cm-qualifier, .cm-variable-3 {
+    color: #6db0c2 !important;
+}
+
+.cm-tag, .cm-atom, .cm-variable-2 {
+    color: #e92c36 !important;
+}
+
+.cm-attribute, .cm-keyword, .cm-number {
+    color: #ffb01f !important;
+}
+
+.cm-comment {
+    color: rgba(0,0,0,.56) !important;
+}
+
+.cm-string {
+    color: #7bb725 !important;
+}
+
+.cm-def {
+    color: #a652de !important;
+}
+
+.cm-variable {
+    color: #3676ff !important;
+}
+
+.cm-error {
+    color: rgba(255,255,255,.87) !important;
+    background-color: #F07178 !important;
+}

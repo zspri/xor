@@ -5,8 +5,6 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/style.css">
-    <link rel="stylesheet" href="assets/syntax.css">
-    <link rel="stylesheet" href="assets/codemirror.css">
     <script async src="assets/filesaver.js"></script>
     <script async src="assets/sweetalert.min.js"></script>
     <script async src="assets/ripple.js"></script>
@@ -17,6 +15,9 @@
     <script src="https://codemirror.net/mode/javascript/javascript.js"></script>
     <script src="https://codemirror.net/mode/xml/xml.js"></script>
     <script src="https://codemirror.net/mode/htmlmixed/htmlmixed.js"></script>
+    <!-- Editor styling -->
+    <link aria-rel="xor-syntax-styling" rel="stylesheet" href="assets/syntax-xor-dark.css">
+    <link aria-rel="xor-editor-styling" rel="stylesheet" href="assets/codemirror-xor-dark.css">
     <title>Xor Editor</title>
 </head>
 <body>
@@ -39,7 +40,18 @@
     <iframe seamless="1" frameborder="0" style="display:block">
     </iframe>
     <div id="panel" style="display:none">
-        <span onclick="toggleThemePanel()">&times;</span>
+        <div class="header">
+            <h1>Theme Settings</h1>
+        </div>
+        <div class="section">
+            <h4>Choose Theme</h4>
+            <select onchange="changeTheme(this.value)">
+                <option value="xor-dark">Xor Dark</option>
+                <option value="xor-light">Xor Light</option>
+            </select>
+            <i class="material-icons">keyboard_arrow_down</i>
+        </div>
+        <span class="close" onclick="toggleThemePanel()">&times;</span>
     </div>
     <script src="assets/editor.js"></script>
 </body>
