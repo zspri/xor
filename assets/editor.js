@@ -166,13 +166,6 @@ $(window).keydown(function (e){
     }
 });
 $(window).keydown(function (e){
-    if ((e.metaKey || e.ctrlKey) && e.keyCode == 78) { /*ctrl+n or command+n*/
-        makeNew();
-        e.preventDefault();
-        return false;
-    }
-});
-$(window).keydown(function (e){
     if ((e.metaKey || e.ctrlKey) && e.keyCode == 80) { /*ctrl+p or command+p*/
         togglePreview();
         e.preventDefault();
