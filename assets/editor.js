@@ -167,7 +167,7 @@ $(window).keydown(function (e){
 });
 $(window).keydown(function (e){
     if ((e.metaKey || e.ctrlKey) && e.keyCode == 78) { /*ctrl+n or command+n*/
-        saveFile();
+        makeNew();
         e.preventDefault();
         return false;
     }
