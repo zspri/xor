@@ -156,3 +156,26 @@ function changeTheme(value) {
     document.getElementsByTagName("head")[0].appendChild(new_editor_style);
     document.getElementsByTagName("head")[0].appendChild(new_syntax_style);
 }
+
+// Commands
+$(window).keydown(function (e){
+    if ((e.metaKey || e.ctrlKey) && e.keyCode == 83) { /*ctrl+s or command+s*/
+        saveFile();
+        e.preventDefault();
+        return false;
+    }
+});
+$(window).keydown(function (e){
+    if ((e.metaKey || e.ctrlKey) && e.keyCode == 78) { /*ctrl+n or command+n*/
+        saveFile();
+        e.preventDefault();
+        return false;
+    }
+});
+$(window).keydown(function (e){
+    if ((e.metaKey || e.ctrlKey) && e.keyCode == 80) { /*ctrl+p or command+p*/
+        togglePreview();
+        e.preventDefault();
+        return false;
+    }
+});
