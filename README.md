@@ -1,7 +1,7 @@
 # Xor Editor
 A simple, yet powerful website editor in your browser.
 
-[![](https://img.shields.io/badge/Try%20it-online-brightgreen.svg)](https://xor-editor.github.io/xor)
+[![](https://img.shields.io/badge/Try%20it-online-brightgreen.svg)](https://nanomotion.github.io/xor/))
 
 ## Features
 
