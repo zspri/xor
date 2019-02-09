@@ -6,10 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/style.css">
     <script async src="assets/filesaver.js"></script>
-    <script async src="assets/sweetalert.min.js"></script>
-    <script async src="assets/ripple.js"></script>
     <script src="assets/codemirror.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--- CodeMirror syntax highlighting -->
     <script src="https://codemirror.net/mode/css/css.js"></script>
     <script src="https://codemirror.net/mode/javascript/javascript.js"></script>
@@ -23,7 +21,6 @@
 <body>
     <div class="navbar">
         <span>Xor Editor</span>
-        <input type="text" name="fname" placeholder="Enter file name" spellcheck="false">
         <span class="right">
             <a href="javascript:makeNew()">New</a>
             <a href="javascript:saveFile()">Save</a>
@@ -35,10 +32,30 @@
         <li onclick="togglePreview();toggleMenu();">Disable live preview</li>
         <li onclick="window.open('https://github.com/xor-editor/xor');toggleMenu();">View on GitHub<span class="right"><i class="material-icons">open_in_new</i></span></li>
     </ul>
-    <div class="editor">
+    <div class="editor-container">
+        <div class="left">
+            <div class="editor">
+                <div class="tabs">
+                    <div class="tab active" aria-editor="html">
+                        HTML
+                    </div>
+                    <div class="tab" aria-editor="css">
+                        CSS
+                    </div>
+                    <div class="tab" aria-editor="js">
+                        JS
+                    </div>
+                </div>
+                <div class="editors">
+                    <div class="e html"></div>
+                    <div class="e css"></div>
+                    <div class="e js"></div>
+                </div>
+            </div>
+        </div>
+        <iframe seamless="1" frameborder="0" style="display:block">
+        </iframe>
     </div>
-    <iframe seamless="1" frameborder="0" style="display:block">
-    </iframe>
     <div id="panel" style="display:none">
         <div class="header">
             <h1>Theme Settings</h1>

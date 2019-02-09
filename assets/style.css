@@ -1,12 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,500');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500|Ubuntu+Mono');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-@import url('https://fonts.googleapis.com/css?family=Inconsolata');
 
 body {
     font-family: 'Roboto', sans-serif;
     color: hsla(0,0%,100%,.87);
     background-color: white;
-    margin: 10px;
+    margin: 0;
     margin-top: 55px;
     overflow: hidden;
 }
@@ -23,7 +22,6 @@ body {
     color: hsla(0,0%,100%,.87);
     background-color: rgb(67, 181, 129);
     padding: 17px;
-    box-shadow: 0 1px 5px rgba(0,0,0,.2), 0 2px 2px rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12);
     position: fixed;
     top: 0;
     left: 0;
@@ -61,46 +59,32 @@ a.mi:hover {
     color: rgba(255,255,255,.87);
 }
 
-.editor {
-    position: absolute;
+.editor-container {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    position: fixed;
+    top: 53px;
     left: 0;
-    right: 50%;
-    bottom: 0;
-    top: 52.4px;
-    z-index: 9998;
-}
-
-.editor.noiframe {
     right: 0;
+    bottom: 0;
 }
 
-iframe {
-    position: absolute;
-    left: 50%;
-    top: 52.4px;4
-    z-index: 9999;
+iframe, .editor {
+    flex: 0 0 50%;
+    max-width: 50vw;
+    min-width: 50vw;
+    min-height: calc(100vh - 53px);
+    max-height: calc(100vh - 53px);
+    overflow-y: scroll !important;
 }
 
-input[type=text] {
-    position: absolute;
-    top: 12px;
-    font-family: 'Inconsolata', monospace;
-    background-color: transparent;
-    outline: none;
-    padding: 5px;
-    color: rgba(255,255,255,.78);
-    margin-left: 12px;
-    border: none;
-    border-bottom: 2px solid rgba(255,255,255,.38);
-    transition: .3s;
+.CodeMirror {
+    min-height: calc(100vh - 53px);
 }
 
-input[type=text]:focus {
-    border-bottom: 2px solid rgba(255,255,255,.87);
-}
-
-input[type=text]::placeholder {
-    color: rgba(255,255,255,.56);
+.editor {
+    overflow-x: hidden !important;
 }
 
 .swal-overlay {
@@ -142,15 +126,15 @@ input[type=text]::placeholder {
 }
 
 .drop {
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 8px 0 rgba(0, 0, 0, 0.12);
     position: absolute;
     padding: 0px;
     list-style-type: none;
     z-index: 10003;
-    border-radius: 3px;
+    border-radius: 10px;
     position: absolute;
     top: 25px;
     right: 20px;
+    background-color: #263238;
 }
 
 .drop li {
@@ -159,19 +143,20 @@ input[type=text]::placeholder {
     font-size: 90%;
     transition: .3s;
     z-index: 10000;
-    background-color: white;
-    color: rgba(0,0,0,.87);
+    background-color: inherit;
+    border-radius: 10px;
+    color: rgba(255,255,255,.87);
     cursor: pointer;
 }
 
 .drop li:hover {
-    background-color: #eee;
+    background-color: #232E33;
 }
 
 .drop li .right {
     text-align: right;
     float: right;
-    color: rgba(0,0,0,.56);
+    color: rgba(255,255,255,.56);
 }
 
 #panel {

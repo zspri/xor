@@ -1,107 +1,105 @@
-var editor = CodeMirror(document.getElementsByClassName("editor")[0], {
+const iframe = document.getElementsByTagName("iframe")[0];
+var editors = {};
+editors.html = CodeMirror($(".editor .html")[0], {
     lineNumbers: true,
     lineWrapping: true,
     autofocus: true,
     mode: "htmlmixed"
 });
+editors.css = CodeMirror($(".editor .css")[0], {
+    lineNumbers: true,
+    lineWrapping: true,
+    mode: "css"
+});
+editors.js = CodeMirror($(".editor .js")[0], {
+    lineNumbers: true,
+    lineWrapping: true,
+    mode: "javascript"
+});
 
-var demo = `<!DOCTYPE html>
-<html>
-<head>
-    <style>
-    * {
-        text-align: center;
-        font-family: 'Roboto';
-        font-weight: 400;
-    }
+function getExportedValue() {
+    var content = `
+    <!DOCTYPE html>
+    <style>${editors.css.getValue()}</style>
+    ${editors.html.getValue()}
+    <script>${editors.js.getValue()}</script>`;
+    return content;
+}
 
-    hr {
-        width: 150px;
-        border: 2px solid #fa0;
-        margin: 40px auto;
-        border-radius: 3px;
-    }
+function updateIframeValue() {
+    iframe.srcdoc = getExportedValue();
+}
 
-    a {
-        color: #fa0;
-        text-decoration: none;
-        transition: .3s linear;
-        position: relative;
-    }
+editors.html.on('change', function(instance, changeObj) {
+    updateIframeValue();
+});
+editors.css.on('change', function(instance, changeObj) {
+    updateIframeValue();
+});
+editors.js.on('change', function(instance, changeObj) {
+    updateIframeValue();
+});
 
-    a::after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 2px;
-        display: block;
-        right: 0;
-        background: #fa0;
-        transition: width .2s ease;
-        -webkit-transition: width .2s ease;
-    }
+var demoHTML = `\
+<h1>Xor Editor</h1>
+<h2>A real-time website editor in your browser.</h2>
+<p>Easily write, organize, and export HTML, JavaScript, and CSS.</p>
+<p class="octicons">
+	<a class="github-button" href="https://github.com/devakira/xor" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star devakira/xor on GitHub">Star</a>
+	<a class="github-button" href="https://github.com/devakira" data-size="large" data-show-count="true" aria-label="Follow @devakira on GitHub">Follow</a>
+</p>
+<p class="copyright">
+  Copyright &copy; 2018-2019 Akira. Licensed under the
+  <a href="https://github.com/devakira/xor/blob/master/LICENSE">
+    MIT License
+  </a>
+</p>
+<script async defer src="https://buttons.github.io/buttons.js"></script>`;
+var demoCSS = `\
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500|Poppins:500');
+body {
+  text-align: center;
+  font-family: 'Roboto';
+}
 
-    a:hover::after {
-        width: 100%;
-        left: 0;
-        background: #fa0;
-    }
-    </style>
-</head>
-<body>
-    <h1>Welcome to Xor</h1>
-    <h2>A real-time website editor in your browser.</h2>
-    <a class="github-button" href="https://github.com/Nanomotion/xor" data-size="large" data-show-count="true">Star</a>
-    &ensp;
-    <a class="github-button" href="https://github.com/Nanomotion/xor/subscription" data-icon="octicon-eye" data-size="large" data-show-count="true">Watch</a>
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <hr>
-    <h1>Features</h1>
-    <h3>Full HTML, CSS, and JS support</h3>
-    <h3>Real-time code previews</h3>
-    <hr>
-    <span>Copyright &copy; 2018 &ndash; <a href="https://github.com/Nanomotion">Nanomotion</a></span>
-</body>
-</html>`;
+h1 {
+  font: 500 2em 'Poppins';
+}
 
-editor.setValue(demo);
-document.getElementsByTagName("iframe")[0].srcdoc = editor.getValue();
+h2 {
+  font-weight: 400;
+}
 
-var fname = document.getElementsByName("fname")[0];
-fname.value = "example.html";
+a {
+  color: rgb(67, 181, 129);
+}
+
+.octicons {
+  margin-top: 2em;
+}
+
+.copyright {
+  font-size: .75em;
+  margin-top: 10em;
+}`;
+var demoJS = ``;
+
+editors.html.setValue(demoHTML);
+editors.css.setValue(demoCSS);
+editors.js.setValue(demoJS);
 
 function saveFile() {
     try {
-        if (!fname.value) {
+        if (false) {
             swal("Error", "Please enter a valid file name.")
         } else {
             var blob = new Blob([editor.getValue()], {type: "text/html;charset=utf-8"})
-            saveAs(blob, fname.value)
+            saveAs(blob, "xor.html");
         }
     } catch (e) {
         swal("Error", "Something went wrong when saving your file.")
     }
 }
-
-function makeNew() {
-    window.open(window.location.href);
-}
-
-function setIframePosition() {
-    var iframe = document.getElementsByTagName("iframe")[0];
-    if ($(document).width() > 900) {
-        iframe.width = String($(document).width() / 2) + "px";
-        iframe.height = String($(document).height() - 54.2) + "px";
-    } else {
-        iframe.width = String(document.body.clientWidth + 18) + "px";
-        iframe.height = String(($(document).height() / 20 * 9)) + "px";
-    }
-}
-
-editor.on('change', function(instance, changeObj) {
-    var iframe = document.getElementsByTagName("iframe")[0];
-    iframe.srcdoc = editor.getValue();
-});
 
 function toggleMenu() {
     var drop = document.getElementsByClassName("drop")[0];
@@ -111,9 +109,6 @@ function toggleMenu() {
         drop.style.display = "block";
     }
 }
-
-$(window).resize(setIframePosition);
-setIframePosition();
 
 function togglePreview() {
     var iframe = document.getElementsByTagName("iframe")[0];
@@ -156,6 +151,20 @@ function changeTheme(value) {
     document.getElementsByTagName("head")[0].appendChild(new_editor_style);
     document.getElementsByTagName("head")[0].appendChild(new_syntax_style);
 }
+
+function changeActiveEditor(activeEditor, tab) {
+    $(".tab").removeClass("active");
+    $(tab).addClass("active");
+    $(`.editors .e`).css("display", "none");
+    $(`.editors .e.${activeEditor}`).css("display", "block");
+    editors[activeEditor].focus();
+}
+
+$(".tab").click(function() {
+    var e = $(this).attr('aria-editor');
+    changeActiveEditor(e, this);
+});
+changeActiveEditor("html", $(".tab.active"));
 
 // Commands
 $(window).keydown(function (e){
